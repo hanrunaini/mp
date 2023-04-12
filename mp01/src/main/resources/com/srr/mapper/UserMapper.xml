@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.srr.mapper.UserMapper">
+
+<!--    public List<User> selectAll();-->
+    <select id="selectAll" resultType="com.srr.pojo.User">
+        select *
+        from user
+    </select>
+    <delete id="deleteByUsernameAndAge">
+        delete
+        from srr_user
+        where username = #{username,jdbcType=VARCHAR}
+          AND age = #{age,jdbcType=NUMERIC}
+    </delete>
+    <update id="updateUsernameByAge">
+        update srr_user
+        set username = #{username,jdbcType=VARCHAR}
+        where age = #{age,jdbcType=NUMERIC}
+    </update>
+    <select id="selectAllByAgeBetween" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from srr_user
+        where
+        age between #{beginAge,jdbcType=NUMERIC} and #{endAge,jdbcType=NUMERIC}
+    </select>
+</mapper>
